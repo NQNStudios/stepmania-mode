@@ -22,7 +22,7 @@
 			`((,stepmania-mode-header-tag-regex . font-lock-variable-name-face)))
 
 (setq stepmania-mode-difficulty-values
-			'("Beginner Easy Medium Hard Challenge Edit"))
+			'("Beginner" "Easy" "Medium" "Hard" "Challenge" "Edit"))
 
 (defun stepmania-mode-insert-tag ()
 	"Insert one of the acceptable header tags for an SSC simfile"
