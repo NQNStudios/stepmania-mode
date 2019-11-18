@@ -40,6 +40,16 @@
 		(insert ";"))
 	(backward-char))
 
+(defun stepmania-mode--tag-value (tag)
+	"Get the value of the given header tag (searching backwards from point for the most recent one)"
+	(condition-case nil
+			(save-excursion
+				(unless (string= (word-at-point) (upcase tag))
+					(search-backward tag))
+				(let* ((value-start (search-forward ":")) (value-end (- (search-forward ";") 1)))
+					(buffer-substring value-start value-end)))
+		(error "")))
+
 (defvar stepmania-mode-map nil "Keymap for `stepmania-mode'")
 
 (progn
