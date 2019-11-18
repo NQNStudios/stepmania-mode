@@ -21,13 +21,23 @@
 (setq stepmania-mode-highlights
 			`((,stepmania-mode-header-tag-regex . font-lock-variable-name-face)))
 
+(setq stepmania-mode-difficulty-values
+			'("Beginner Easy Medium Hard Challenge Edit"))
+
 (defun stepmania-mode-insert-tag ()
 	"Insert one of the acceptable header tags for an SSC simfile"
 	(interactive)
+	(when (not (= (current-column) 0))
+		(end-of-line)
+		(open-line 1)
+		(next-line))
 	(insert "#")
-	(insert (completing-read "Choose a tag:" stepmania-mode-header-tags))
-	(insert ":")
-	(insert ";")
+	(let ((tag (completing-read "Choose a tag:" stepmania-mode-header-tags)))
+		(insert tag)
+		(insert ":")
+		(pcase tag
+			("DIFFICULTY" (insert (completing-read "Choose a difficulty:" stepmania-mode-difficulty-values))))
+		(insert ";"))
 	(backward-char))
 
 (defvar stepmania-mode-map nil "Keymap for `stepmania-mode'")
