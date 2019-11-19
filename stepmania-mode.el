@@ -1,4 +1,47 @@
-;; sourced from https://github.com/stepmania/stepmania/wiki/ssc as of 11-18-19
+;;; stepmania-mode.el --- Make Stepmania simfiles in Emacs.
+
+;; Copyright (C) 2019 Nat Quayle Nelson
+
+;; Author: Nat Quayle Nelson (natquaylenelson@gmail.com)
+;; Compatibility: Emacs25
+
+;; This file is not part of GNU Emacs.
+;;
+;; This is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Commentary:
+;; None yet.
+
+;;; Use:
+
+;;; Install:
+
+;; Put something similar to the following in your ~/.emacs to use this file:
+;;
+;; (load "~/path/to/mplayer-mode.el")
+;; (load "~/path/to/stepmania-mode.el")
+;;
+
+;;; Dependency:
+
+;; mplayer-mode (https://github.com/markhepburn/mplayer-mode/blob/master/mplayer-mode.el)
+;; mplayer
+;; Stepmania 5 (to play your sim files)
+
+;; Header tags sourced from https://github.com/stepmania/stepmania/wiki/ssc as of 11-18-19
 (setq stepmania-mode-header-tags
 			(let ((tag-symbol-list
 						 '(version title subtitle artist titletranslit
@@ -57,7 +100,7 @@
 
 	(define-key stepmania-mode-map (kbd "#") #'stepmania-mode-insert-tag))
 
-(define-derived-mode stepmania-mode fundamental-mode "Simfile"
+(define-derived-mode stepmania-mode mplayer-mode "Simfile"
 	"Major mode for making Stepmania charts.
 
 \\{stepmania-mode-map}"
