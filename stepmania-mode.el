@@ -67,6 +67,12 @@
 (setq stepmania-mode-difficulty-values
 			'("Beginner" "Easy" "Medium" "Hard" "Challenge" "Edit"))
 
+(defun stepmania-mode--find-file-and-move-to-directory (filename)
+	"Find a file, move it to the same directory as the current file, and return the new path."
+	(interactive "FFind file: ")
+	(rename-file filename (file-name-directory (buffer-file-name)))
+	(file-name-nondirectory filename))
+
 (defun stepmania-mode-insert-tag ()
 	"Insert one of the acceptable header tags for an SSC simfile"
 	(interactive)
@@ -79,7 +85,9 @@
 		(insert tag)
 		(insert ":")
 		(pcase tag
-			("DIFFICULTY" (insert (completing-read "Choose a difficulty:" stepmania-mode-difficulty-values))))
+			;; Provide more completions for certain tags
+			("DIFFICULTY" (insert (completing-read "Choose a difficulty:" stepmania-mode-difficulty-values)))
+			("MUSIC" (insert (call-interactively #'stepmania-mode--find-file-and-move-to-directory))))
 		(insert ";"))
 	(backward-char))
 
